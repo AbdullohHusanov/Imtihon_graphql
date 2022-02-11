@@ -1,0 +1,9 @@
+type Query {
+    myOrders: [String]!
+}
+
+type Mutation {
+    addOrder (
+        product_id: ID!
+    ): Response
+}

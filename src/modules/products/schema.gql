@@ -1,0 +1,66 @@
+scalar Any
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 5
+}
+
+type Query {
+    categories: [Category!]!
+    
+    product (
+        search: String
+        pagination: Pagination = {}
+    ): [Product!]!
+}
+
+type Mutation {
+    addCategories(
+        category_name: String!
+    ): Response!
+
+    changeCategories(
+        category_id: ID!
+        category_name: String!
+    ): Response!
+
+    addProduct(
+        category: Int!
+        product_name: String!
+        price: Int!
+        short_desc: String!
+        long_desc: String!
+        product_img: String!
+    ): Response!
+    
+    changeProduct(
+        product_id: ID!
+        category: ID!
+        product_name: String!
+        price: Int!
+        short_desc: String!
+        long_desc: String!
+        product_img: String!
+    ): Response!
+}
+
+type Category {
+    id: ID!
+    name: String!
+}
+
+type Product {
+    product_id: ID!
+    product_name: String!
+    category: String!
+    price: Int!
+    short_desc: String!
+    long_desc: String!
+    product_img: String!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	data: Any
+}
